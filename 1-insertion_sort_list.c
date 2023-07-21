@@ -10,23 +10,23 @@ if (list == NULL || *list == NULL || (*list)->next == NULL)
 return;
 while (crrt)
 {
-listint_t *tmp = crrt;
-while (tmp->prev != NULL && tmp->n < tmp->prev->n)
+listint_t *tmp = crrt->next;
+listint_t *sd = crrt->prev;
+while (sd != NULL && sd->n > crrt->n)
 {
-listint_t *prev = tmp->prev;
-listint_t *next = tmp->next;
-if (prev->prev)
-prev->prev->next = tmp;
-else
-*list = tmp;
-if (tmp->next)
-tmp->next->prev = prev;
-tmp->prev = prev->prev;
-tmp->next = prev;
-prev->prev = tmp;
-prev->next = next;
-print_list(*list);
+sd->next = crrt->next;
+if (crrt->next)
+crrt->next->prev = sd;
+crrt->next = sd;
+crrt->prev = sd->prev;
+if (sd->prev)
+sd->prev->next = crrt;
+sd->prev = crrt;
+sd = crrt->prev;
 }
-crrt = crrt->next;
+crrt = tmp;
+while (*list && (*list)->prev != NULL)
+*list = (*list)->prev;
+print_list(*list);
 }
 }
