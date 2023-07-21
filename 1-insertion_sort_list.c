@@ -5,9 +5,10 @@
 */
 void insertion_sort_list(listint_t **list)
 {
-listint_t *crrt = (*list)->next;
+listint_t *crrt;
 if (list == NULL || *list == NULL || (*list)->next == NULL)
 return;
+crrt = (*list)->next;
 while (crrt != NULL)
 {
 listint_t *tmp = crrt->next;
