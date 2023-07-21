@@ -5,38 +5,28 @@
 */
 void insertion_sort_list(listint_t **list)
 {
-listint_t *sd = NULL, *crrt = *list, *tmp;
+listint_t *crrt = (*list)->next;
 if (list == NULL || *list == NULL || (*list)->next == NULL)
 return;
 while (crrt != NULL)
 {
-tmp = crrt->next;
-if (sd == NULL || crrt->n < sd->n)
+listint_t *tmp = crrt->next;
+listint_t *sd = crrt->prev;
+while (sd && sd->n > crrt->n)
 {
+sd->next = crrt->next;
+if (crrt->next)
+crrt->next->prev = sd;
 crrt->next = sd;
-crrt->prev = NULL;
-if (sd != NULL)
+crrt->prev = sd->prev;
 sd->prev = crrt;
-sd = crrt;
-}
+if (crrt->prev)
+crrt->prev->next = crrt;
 else
-{
-listint_t *sea = sd;
-while (sea != NULL)
-{
-if (sea->next == NULL || crrt->n < sea->next->n)
-{
-crrt->next = sea->next;
-if (sea->next != NULL)
-sea->next->prev = crrt;
-sea->next = crrt;
-crrt->prev = sea;
-break;
-}
-sea = sea->next;
-}
+*list = crrt;
+sd = crrt->prev;
+print_list(*list);
 }
 crrt = tmp;
 }
-*list = sd;
 }
