@@ -19,6 +19,8 @@ if (crrt->next)
 crrt->next->prev = sd;
 crrt->next = sd;
 crrt->prev = sd->prev;
+if (sd->prev)
+sd->prev->next = crrt;
 sd->prev = crrt;
 if (crrt->prev)
 crrt->prev->next = crrt;
