@@ -27,6 +27,6 @@ prev->prev = tmp;
 prev->next = next;
 print_list(*list);
 }
-crrt =crrt->next;
+crrt = crrt->next;
 }
 }
